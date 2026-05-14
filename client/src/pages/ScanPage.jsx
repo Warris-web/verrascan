@@ -1,5 +1,7 @@
 import { useState, useRef, useCallback } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 
 const API = import.meta.env.VITE_API_URL;
 
@@ -22,6 +24,7 @@ const SIGNALS = [
 ];
 
 export default function ScanPage() {
+    const navigate = useNavigate();
   const videoRef  = useRef(null);
   const canvasRef = useRef(null);
   const streamRef = useRef(null);
@@ -114,8 +117,8 @@ export default function ScanPage() {
             {p.label}
           </button>
         ))}
-        <span style={{ marginLeft: "auto", fontSize: 11, color: "#444" }}>
-          {cameraOn ? "📷 Camera live" : "Demo mode — camera off"}
+        <span style={{ marginLeft: "auto", fontSize: 11, color: "rgb(0, 201, 167)" }}>
+          {cameraOn ? "📷 Camera live" : "Camera off"}
         </span>
       </div>
 
@@ -231,7 +234,12 @@ export default function ScanPage() {
             <div style={{ marginTop: 14, background: "rgba(0,201,167,0.06)", border: "1px solid rgba(0,201,167,0.15)", borderRadius: 8, padding: "12px 14px" }}>
               <div style={{ fontSize: 11, fontWeight: 600, color: "#00C9A7", marginBottom: 4 }}>Verified Vendors Nearby</div>
               <div style={{ fontSize: 11, color: "#666", lineHeight: 1.6 }}>3 pharmacies within 1.2km carry genuine {product.label}. Payment via Squad-powered vendor links.</div>
-              <button style={{ marginTop: 8, background: "#00C9A7", color: "#000", border: "none", borderRadius: 6, padding: "7px 14px", fontSize: 11, fontWeight: 700, cursor: "pointer" }}>Find Verified Vendor →</button>
+              {/* <button style={{ marginTop: 8, background: "#00C9A7", color: "#000", border: "none", borderRadius: 6, padding: "7px 14px", fontSize: 11, fontWeight: 700, cursor: "pointer" }}>Find Verified Vendor →</button> */}
+              <button
+                    onClick={() => navigate(`/vendor/locator?product=${product.label}&city=Lagos`)}
+                    style={{ marginTop: 8, background: "#00C9A7", color: "#000", border: "none", borderRadius: 6, padding: "7px 14px", fontSize: 11, fontWeight: 700, cursor: "pointer" }}>
+                    Find Verified Vendor →
+               </button>
             </div>
           )}
           {phase === "result" && result?.verdict === "GENUINE" && (

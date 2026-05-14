@@ -8,12 +8,29 @@ export default function Topbar() {
 
   const handleLogout = () => { logout(); navigate("/login"); };
 
+//   const links = [
+//     { label: "Scanner",  path: "/",        always: true },
+//     { label: "Onboard",  path: "/onboard", always: true },
+//     { label: "NAFDAC",   path: "/dashboard", role: "nafdac" },
+//     { label: "My Brands", path: "/brand",   role: "brand" },
+//   ].filter(l => l.always || (user && user.role === l.role));
+
+  // const links = [
+  //   { label: "Scanner",          path: "/",                always: true },
+  //   { label: "Onboard",          path: "/onboard",         always: true },
+  //   { label: "Vendor Network",   path: "/vendor/register", always: true },
+  //   { label: "NAFDAC",           path: "/dashboard",       role: "nafdac" },
+  //   { label: "My Brands",        path: "/brand",           role: "brand" },
+  // ].filter(l => l.always || (user && user.role === l.role));
+
   const links = [
-    { label: "Scanner",  path: "/",        always: true },
-    { label: "Onboard",  path: "/onboard", always: true },
-    { label: "NAFDAC",   path: "/dashboard", role: "nafdac" },
-    { label: "My Brands", path: "/brand",   role: "brand" },
-  ].filter(l => l.always || (user && user.role === l.role));
+  { label: "Scanner",       path: "/",                always: true  },
+  { label: "Onboard",       path: "/onboard",         always: true  },
+  { label: "Vendor Network",path: "/vendor/register", always: true  },
+  { label: "NAFDAC",        path: "/dashboard",       role: "nafdac"},
+  { label: "My Brands",     path: "/brand",           role: "brand" },
+  { label: "My Pharmacy",   path: "/vendor/portal",   role: "vendor"},
+].filter(l => l.always || (user && user.role === l.role));
 
   return (
     <nav style={{ background: "#141414", borderBottom: "1px solid #2A2A2A", padding: "0 28px", height: 52, display: "flex", alignItems: "center", justifyContent: "space-between", position: "sticky", top: 0, zIndex: 100 }}>

@@ -208,7 +208,7 @@ export default function VendorPortal() {
 )}
 
       {/* Orders tab */}
-      {tab === "orders" && (
+      {/* {tab === "orders" && (
         <div style={{ background: "#141414", border: "1px solid #2A2A2A", borderRadius: 12, padding: "20px 24px" }}>
           <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 16 }}>Incoming Orders via Squad</div>
           <div style={{ padding: "32px 0", textAlign: "center", color: "#555" }}>
@@ -217,7 +217,54 @@ export default function VendorPortal() {
             <div style={{ fontSize: 11 }}>When customers scan a fake product near you, they'll be directed here. Squad payments will appear as they come in.</div>
           </div>
         </div>
-      )}
+      )} */}
+      {tab === "orders" && (
+  <div style={{ background: "#141414", border: "1px solid #2A2A2A", borderRadius: 12, padding: "20px 24px" }}>
+    <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 4 }}>Incoming Customer Orders</div>
+    <div style={{ fontSize: 11, color: "#555", marginBottom: 20 }}>Customers directed here after scanning a fake product near you</div>
+
+    <div style={{ background: "rgba(0,201,167,0.05)", border: "1px solid rgba(0,201,167,0.15)", borderRadius: 8, padding: "12px 14px", marginBottom: 20 }}>
+      <div style={{ fontSize: 11, color: "#00C9A7", fontWeight: 600, marginBottom: 4 }}>How it works</div>
+      <div style={{ fontSize: 11, color: "#666", lineHeight: 1.7 }}>
+        1. Customer scans a fake product near your location<br/>
+        2. VeraScann directs them to your pharmacy<br/>
+        3. They pay via Squad and get a receipt code<br/>
+        4. They show you the code — you verify and hand over the product<br/>
+        5. Payment arrives in your Squad account automatically
+      </div>
+    </div>
+
+    {/* Mock recent orders — replace with real data when Squad webhooks fire */}
+    {vendor.orders_count > 0 ? (
+      <table style={{ width: "100%", borderCollapse: "collapse" }}>
+        <thead>
+          <tr>
+            {["Receipt Code", "Product", "Amount", "Status", "Time"].map(h => (
+              <th key={h} style={{ fontSize: 10, fontWeight: 600, color: "#555", textTransform: "uppercase", letterSpacing: "0.06em", padding: "6px 10px", textAlign: "left", borderBottom: "1px solid #222" }}>{h}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          <tr style={{ borderBottom: "1px solid #1A1A1A" }}>
+            <td style={{ padding: "10px", fontSize: 12, color: "#00C9A7", fontFamily: "monospace" }}>VS-ABC123</td>
+            <td style={{ padding: "10px", fontSize: 12, color: "#fff" }}>Coartem</td>
+            <td style={{ padding: "10px", fontSize: 12, color: "#43A047", fontWeight: 600 }}>₦4,500</td>
+            <td style={{ padding: "10px" }}><span style={{ fontSize: 10, color: "#43A047", background: "rgba(67,160,71,0.1)", padding: "2px 8px", borderRadius: 4 }}>Paid</span></td>
+            <td style={{ padding: "10px", fontSize: 11, color: "#444" }}>2m ago</td>
+          </tr>
+        </tbody>
+      </table>
+    ) : (
+      <div style={{ padding: "32px 0", textAlign: "center", color: "#555" }}>
+        <div style={{ fontSize: 32, marginBottom: 12 }}>📦</div>
+        <div style={{ fontSize: 13, fontWeight: 500, marginBottom: 6 }}>No orders yet</div>
+        <div style={{ fontSize: 11, lineHeight: 1.6 }}>
+          Once customers scan fake products near <strong style={{ color: "#fff" }}>{vendor.city}</strong> and get directed to you, their orders appear here with receipt codes to verify.
+        </div>
+      </div>
+    )}
+  </div>
+)}
 
       {/* Settings tab */}
       {tab === "settings" && (

@@ -1,4 +1,6 @@
-import { useState } from "react";
+
+
+import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import axios from "axios";
 
@@ -15,6 +17,18 @@ const NIGERIAN_STATES = [
 const PRODUCTS = ["Coartem","Vaseline","Paracetamol","Amoxicillin","Artemether","Chloroquine","Ibuprofen","Metronidazole"];
 
 export default function VendorRegisterPage() {
+  // Handle Squad redirect back
+  useEffect(() => {
+    const status    = searchParams.get("status");
+    const reference = searchParams.get("reference");
+
+    if (status === "success" && reference) {
+      // Activate vendor by reference
+      axios.post(`${API}/api/vendors/activate-by-reference`, { reference })
+        .catch(() => {});
+      setStep(4);
+    }
+  }, []);
   const navigate  = useNavigate();
   const [searchParams] = useSearchParams();
   const [step, setStep] = useState(
@@ -66,7 +80,8 @@ export default function VendorRegisterPage() {
       products:      form.products.filter(p => p.name && p.price > 0),
       password:      form.password,
     });
-    if (data.payment_url) window.open(data.payment_url, "_blank");
+    // if (data.payment_url) window.open(data.payment_url, "_blank");
+    if (data.payment_url) window.location.href = data.payment_url;
     setStep(4);
   } catch (err) {
     setError(err.response?.data?.error || "Registration failed");
@@ -287,6 +302,41 @@ export default function VendorRegisterPage() {
                 {loading ? "Processing..." : "Pay ₦10,000 via Squad →"}
               </button>
             </div>
+          </div>
+        )}
+        {step === 4 && (
+          <div style={{ textAlign: "center", padding: "20px 0" }}>
+            <div style={{ width: 72, height: 72, borderRadius: "50%", background: "rgba(0,201,167,0.1)", border: "2px solid #00C9A7", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 32, margin: "0 auto 16px" }}>✓</div>
+            <div style={{ fontSize: 20, fontWeight: 700, color: "#00C9A7", marginBottom: 8 }}>Payment Successful!</div>
+            <div style={{ fontSize: 12, color: "#666", marginBottom: 24 }}>
+              Your pharmacy is now on the VeraScann verified network. Customers will be directed to you when fake products are detected nearby.
+            </div>
+
+            <div style={{ background: "#0D2E24", border: "1px solid #009B82", borderRadius: 10, padding: "16px", textAlign: "left", marginBottom: 20 }}>
+              <div style={{ fontSize: 11, fontWeight: 600, color: "#00C9A7", marginBottom: 10 }}>You're live on the network</div>
+              {[
+                "Your pharmacy appears in the vendor locator",
+                "Customers can find and pay you via Squad",
+                "You get notified when a customer is directed to you",
+                "Manage your products and prices from your portal",
+              ].map((item, i) => (
+                <div key={i} style={{ display: "flex", gap: 8, marginBottom: 7 }}>
+                  <span style={{ color: "#00C9A7", fontSize: 11, flexShrink: 0 }}>✓</span>
+                  <span style={{ fontSize: 11, color: "#666" }}>{item}</span>
+                </div>
+              ))}
+            </div>
+
+            <button
+              onClick={() => navigate("/login")}
+              style={{ width: "100%", background: "#00C9A7", color: "#000", border: "none", borderRadius: 8, padding: "12px", fontSize: 13, fontWeight: 700, cursor: "pointer", fontFamily: "inherit", marginBottom: 10 }}>
+              Login to Vendor Portal →
+            </button>
+            <button
+              onClick={() => { setStep(0); setForm({ pharmacy_name: "", owner_name: "", email: "", phone: "", address: "", city: "", state: "", password: "", confirm_password: "", products: [] }); }}
+              style={{ width: "100%", background: "transparent", color: "#555", border: "1px solid #2A2A2A", borderRadius: 8, padding: "11px", fontSize: 12, cursor: "pointer", fontFamily: "inherit" }}>
+              Register Another Pharmacy
+            </button>
           </div>
         )}
 

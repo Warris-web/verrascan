@@ -2,6 +2,45 @@ const Product           = require("../models/Product");
 const BrandRegistration = require("../models/BrandRegistration");
 
 // Add a product to existing brand account
+// exports.addProduct = async (req, res) => {
+//   try {
+//     const { product_name, nafdac_number, pantone_code, batch_format, category } = req.body;
+
+//     if (!product_name || !nafdac_number)
+//       return res.status(400).json({ error: "Product name and NAFDAC number required" });
+
+//     // Find their brand account
+//     const brand = await BrandRegistration.findOne({
+//       contact_email: req.user.email,
+//       status:        "active",
+//     });
+
+//     if (!brand)
+//       return res.status(403).json({ error: "No active brand account found. Please complete onboarding first." });
+
+//     // Check for duplicate product
+//     const existing = await Product.findOne({
+//       brand_id:     brand._id,
+//       nafdac_number,
+//     });
+//     if (existing)
+//       return res.status(400).json({ error: "A product with this NAFDAC number already exists in your account." });
+
+//     const product = await Product.create({
+//       brand_id:      brand._id,
+//       contact_email: req.user.email,
+//       product_name,
+//       nafdac_number,
+//       pantone_code,
+//       batch_format,
+//       category: category || "general",
+//     });
+
+//     return res.status(201).json({ success: true, product });
+//   } catch (err) {
+//     return res.status(500).json({ error: err.message });
+//   }
+// };
 exports.addProduct = async (req, res) => {
   try {
     const { product_name, nafdac_number, pantone_code, batch_format, category } = req.body;
@@ -9,22 +48,23 @@ exports.addProduct = async (req, res) => {
     if (!product_name || !nafdac_number)
       return res.status(400).json({ error: "Product name and NAFDAC number required" });
 
-    // Find their brand account
+    // Find brand by email — active OR pending (pending means just registered, payment processing)
     const brand = await BrandRegistration.findOne({
       contact_email: req.user.email,
-      status:        "active",
     });
 
     if (!brand)
-      return res.status(403).json({ error: "No active brand account found. Please complete onboarding first." });
+      return res.status(403).json({
+        error: "No brand account found. Please complete onboarding at /onboard first.",
+      });
 
-    // Check for duplicate product
+    // Check duplicate
+    const Product = require("../models/Product");
     const existing = await Product.findOne({
-      brand_id:     brand._id,
-      nafdac_number,
+      brand_id: brand._id, nafdac_number,
     });
     if (existing)
-      return res.status(400).json({ error: "A product with this NAFDAC number already exists in your account." });
+      return res.status(400).json({ error: "A product with this NAFDAC number already exists." });
 
     const product = await Product.create({
       brand_id:      brand._id,

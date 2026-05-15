@@ -177,11 +177,27 @@ const STEPS = ["Company Details", "Squad Payment", "Done"];
 
 export default function OnboardPage() {
   // Auto-activate when Squad redirects back
+// useEffect(() => {
+//   if (searchParams.get("status") === "success" && form.contact_email) {
+//     axios.post(`${API}/api/brands/activate-by-email`, {
+//       contact_email: form.contact_email,
+//     }).catch(() => {});
+//   }
+// }, []);
+
 useEffect(() => {
-  if (searchParams.get("status") === "success" && form.contact_email) {
-    axios.post(`${API}/api/brands/activate-by-email`, {
-      contact_email: form.contact_email,
-    }).catch(() => {});
+  const status    = searchParams.get("status");
+  const reference = searchParams.get("reference");
+
+  if (status === "success") {
+    if (reference) {
+      axios.post(`${API}/api/brands/activate-by-reference`, { reference })
+        .catch(() => {});
+    } else if (form.contact_email) {
+      axios.post(`${API}/api/brands/activate-by-email`, { contact_email: form.contact_email })
+        .catch(() => {});
+    }
+    setStep(2);
   }
 }, []);
   const navigate       = useNavigate();

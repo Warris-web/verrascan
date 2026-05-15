@@ -442,3 +442,23 @@ exports.activateByEmail = async (req, res) => {
     return res.status(500).json({ error: err.message });
   }
 };
+exports.activateByReference = async (req, res) => {
+  try {
+    const { reference } = req.body;
+    if (!reference) return res.status(400).json({ error: "Reference required" });
+
+    const brandId = reference.replace("VS-", "").split("?")[0];
+
+    const brand = await BrandRegistration.findByIdAndUpdate(
+      brandId,
+      { status: "active", squad_reference: reference },
+      { new: true }
+    );
+
+    if (!brand) return res.status(404).json({ error: "Brand not found" });
+
+    return res.json({ success: true, brand });
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
+};

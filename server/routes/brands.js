@@ -21,9 +21,12 @@ const router            = express.Router();
 const auth              = require("../middleware/auth");
 const BrandRegistration = require("../models/BrandRegistration");
 // const { registerBrand, getBrands } = require("../controllers/brandController");
-const { registerBrand, getBrands, activateByEmail } = require("../controllers/brandController");
+// const { registerBrand, getBrands, activateByEmail } = require("../controllers/brandController");
+const { registerBrand, getBrands, activateByEmail, activateByReference } = require("../controllers/brandController");
 
 
+
+router.post("/activate-by-reference", activateByReference);
 router.post("/register",        registerBrand);
 router.post("/activate-by-email", activateByEmail);
 router.get("/",                 auth(["brand", "nafdac"]), getBrands);

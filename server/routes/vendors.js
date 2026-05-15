@@ -23,6 +23,7 @@ const {
   getMyVendorProfile,
   updateProducts,
   activateVendor,
+  activateByReference,
   getAllVendors,
   payVendor,
 } = require("../controllers/vendorController");
@@ -34,5 +35,6 @@ router.put("/me/products",    auth(["vendor"]), updateProducts);
 router.get("/",               auth(["nafdac"]), getAllVendors);
 router.post("/activate",      auth(["nafdac"]), activateVendor);
 router.post("/pay", payVendor);
+router.post("/activate-by-reference", activateByReference);
 
 module.exports = router;

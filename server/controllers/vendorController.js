@@ -425,3 +425,26 @@ exports.payVendor = async (req, res) => {
   }
 };
 
+exports.activateByReference = async (req, res) => {
+  try {
+    const { reference } = req.body;
+    if (!reference)
+      return res.status(400).json({ error: "Reference required" });
+
+    // Reference format is VV-{vendorId}
+    const vendorId = reference.replace("VV-", "").split("?")[0];
+
+    const vendor = await Vendor.findByIdAndUpdate(
+      vendorId,
+      { status: "active", squad_reference: reference },
+      { new: true }
+    );
+
+    if (!vendor)
+      return res.status(404).json({ error: "Vendor not found" });
+
+    return res.json({ success: true, vendor });
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
+};

@@ -189,35 +189,64 @@ export default function VendorLocatorPage() {
       .finally(() => setLoading(false));
   }, []);
 
+  // const initiatePayment = async (vendor, prod) => {
+  //   setPaying(true);
+  //   try {
+  //     const { data } = await axios.post(`${API}/api/vendors/pay`, {
+  //       vendor_id:    vendor._id,
+  //       product_name: prod.name,
+  //       amount:       prod.price,
+  //       customer_email: "customer@verascann.com", // in prod — collect from user
+  //     });
+
+  //     if (data.payment_url) {
+  //       // window.open(data.payment_url, "_blank");
+  //        window.location.href = data.payment_url;
+  //       // Show pending receipt
+  //       setReceipt({
+  //         code:         data.receipt_code,
+  //         vendor:       vendor.pharmacy_name,
+  //         address:      vendor.address,
+  //         phone:        vendor.phone,
+  //         product:      prod.name,
+  //         price:        prod.price,
+  //         status:       "pending",
+  //         generated_at: new Date().toLocaleString("en-NG"),
+  //       });
+  //     }
+  //   } catch (err) {
+  //     alert("Payment failed. Please try again.");
+  //   } finally { setPaying(false); }
+  // };
+
   const initiatePayment = async (vendor, prod) => {
-    setPaying(true);
-    try {
-      const { data } = await axios.post(`${API}/api/vendors/pay`, {
-        vendor_id:    vendor._id,
-        product_name: prod.name,
-        amount:       prod.price,
-        customer_email: "customer@verascann.com", // in prod — collect from user
-      });
+  setPaying(true);
+  try {
+    const { data } = await axios.post(`${API}/api/vendors/pay`, {
+      vendor_id:      vendor._id === "demo1" || vendor._id === "demo2" || vendor._id === "demo3"
+                        ? null : vendor._id,
+      product_name:   prod.name,
+      amount:         prod.price,
+      customer_email: "customer@flux.com",
+    });
 
-      if (data.payment_url) {
-        window.open(data.payment_url, "_blank");
-        // Show pending receipt
-        setReceipt({
-          code:         data.receipt_code,
-          vendor:       vendor.pharmacy_name,
-          address:      vendor.address,
-          phone:        vendor.phone,
-          product:      prod.name,
-          price:        prod.price,
-          status:       "pending",
-          generated_at: new Date().toLocaleString("en-NG"),
-        });
-      }
-    } catch (err) {
-      alert("Payment failed. Please try again.");
-    } finally { setPaying(false); }
-  };
+    // Show receipt immediately
+    setReceipt({
+      code:         data.receipt_code,
+      vendor:       vendor.pharmacy_name,
+      address:      vendor.address,
+      phone:        vendor.phone,
+      product:      prod.name,
+      price:        prod.price,
+      status:       "pending",
+      generated_at: new Date().toLocaleString("en-NG"),
+      payment_url:  data.payment_url,
+    });
 
+  } catch (err) {
+    alert("Payment initiation failed. Please try again.");
+  } finally { setPaying(false); }
+};
   return (
     <div style={{ padding: 24, maxWidth: 960, margin: "0 auto" }}>
       {/* Header */}
@@ -363,25 +392,48 @@ export default function VendorLocatorPage() {
 
               {/* Pay button — shows when product selected from this vendor */}
               {selected?._id === vendor._id && selProd && (
-                <div style={{ background: "rgba(0,201,167,0.05)", border: "1px solid rgba(0,201,167,0.2)", borderRadius: 10, padding: "14px 16px" }}>
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
-                    <div>
-                      <div style={{ fontSize: 13, fontWeight: 600 }}>Pay for {selProd.name}</div>
-                      <div style={{ fontSize: 11, color: "#555" }}>at {vendor.pharmacy_name} · Squad payment</div>
-                    </div>
-                    <div style={{ fontSize: 20, fontWeight: 700, color: "#00C9A7" }}>₦{selProd.price?.toLocaleString()}</div>
-                  </div>
-                  <div style={{ display: "flex", gap: 10 }}>
-                    <button onClick={() => { setSelected(null); setSelProd(null); }} style={{ background: "transparent", color: "#555", border: "1px solid #2A2A2A", borderRadius: 8, padding: "10px 16px", fontSize: 12, cursor: "pointer", fontFamily: "inherit" }}>
-                      Cancel
-                    </button>
+                // <div style={{ background: "rgba(0,201,167,0.05)", border: "1px solid rgba(0,201,167,0.2)", borderRadius: 10, padding: "14px 16px" }}>
+                //   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
+                //     <div>
+                //       <div style={{ fontSize: 13, fontWeight: 600 }}>Pay for {selProd.name}</div>
+                //       <div style={{ fontSize: 11, color: "#555" }}>at {vendor.pharmacy_name} · Squad payment</div>
+                //     </div>
+                //     <div style={{ fontSize: 20, fontWeight: 700, color: "#00C9A7" }}>₦{selProd.price?.toLocaleString()}</div>
+                //   </div>
+                //   <div style={{ display: "flex", gap: 10 }}>
+                //     <button onClick={() => { setSelected(null); setSelProd(null); }} style={{ background: "transparent", color: "#555", border: "1px solid #2A2A2A", borderRadius: 8, padding: "10px 16px", fontSize: 12, cursor: "pointer", fontFamily: "inherit" }}>
+                //       Cancel
+                //     </button>
+                //     <button
+                //       onClick={() => initiatePayment(vendor, selProd)}
+                //       disabled={paying}
+                //       style={{ flex: 1, background: "#00C9A7", color: "#000", border: "none", borderRadius: 8, padding: "11px", fontSize: 13, fontWeight: 700, cursor: "pointer", fontFamily: "inherit", opacity: paying ? 0.7 : 1 }}>
+                //       {paying ? "Opening Squad..." : `Pay ₦${selProd.price?.toLocaleString()} via Squad →`}
+                //     </button>
+                //   </div>
+                // </div>
+                <div style={{ display: "flex", gap: 10 }}>
+                  <button
+                    onClick={() => {
+                      const text = `VeraScann Receipt\nCode: ${receipt.code}\nPharmacy: ${receipt.vendor}\nAddress: ${receipt.address}\nProduct: ${receipt.product}\nAmount: ₦${receipt.price?.toLocaleString()}\nDate: ${receipt.generated_at}`;
+                      navigator.clipboard?.writeText(text);
+                      alert("Receipt copied to clipboard");
+                    }}
+                    style={{ flex: 1, background: "#1A1A1A", color: "#666", border: "1px solid #2A2A2A", borderRadius: 8, padding: "11px", fontSize: 12, cursor: "pointer", fontFamily: "inherit" }}>
+                    Copy Receipt
+                  </button>
+                  {receipt.payment_url && (
                     <button
-                      onClick={() => initiatePayment(vendor, selProd)}
-                      disabled={paying}
-                      style={{ flex: 1, background: "#00C9A7", color: "#000", border: "none", borderRadius: 8, padding: "11px", fontSize: 13, fontWeight: 700, cursor: "pointer", fontFamily: "inherit", opacity: paying ? 0.7 : 1 }}>
-                      {paying ? "Opening Squad..." : `Pay ₦${selProd.price?.toLocaleString()} via Squad →`}
+                      onClick={() => { window.location.href = receipt.payment_url; }}
+                      style={{ flex: 2, background: "#00C9A7", color: "#000", border: "none", borderRadius: 8, padding: "11px", fontSize: 13, fontWeight: 700, cursor: "pointer", fontFamily: "inherit" }}>
+                      Pay ₦{receipt.price?.toLocaleString()} via Squad →
                     </button>
-                  </div>
+                  )}
+                  {!receipt.payment_url && (
+                    <button onClick={() => setReceipt(null)} style={{ flex: 1, background: "#00C9A7", color: "#000", border: "none", borderRadius: 8, padding: "11px", fontSize: 13, fontWeight: 700, cursor: "pointer", fontFamily: "inherit" }}>
+                      Done ✓
+                    </button>
+                  )}
                 </div>
               )}
 

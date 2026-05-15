@@ -24,12 +24,13 @@ export default function Topbar() {
   // ].filter(l => l.always || (user && user.role === l.role));
 
   const links = [
-  { label: "Scanner",       path: "/",                always: true  },
+  { label: "Scanner", path: "/scan", always: true },
   { label: "Onboard",       path: "/onboard",         always: true  },
   { label: "Vendor Network",path: "/vendor/register", always: true  },
   { label: "NAFDAC",        path: "/dashboard",       role: "nafdac"},
   { label: "My Brands",     path: "/brand",           role: "brand" },
   { label: "My Pharmacy",   path: "/vendor/portal",   role: "vendor"},
+
 ].filter(l => l.always || (user && user.role === l.role));
 
   return (

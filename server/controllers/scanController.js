@@ -14,7 +14,7 @@ exports.scanProduct = async (req, res) => {
       .update(image)
       .digest("hex");
 
-    // Call Boluwatife's AI microservice
+    // Call AI microservice
     const aiResponse = await axios.post(
       `${process.env.AI_SERVICE_URL}/verify`,
       { image, category: product_category || "general" },
@@ -22,6 +22,23 @@ exports.scanProduct = async (req, res) => {
     );
 
     const { verdict, confidence, signals } = aiResponse.data;
+    // Update product scan counts if product is registered
+      try {
+        const Product = require("../models/Product");
+        const matchedProduct = await Product.findOne({
+          product_name: new RegExp(product_name, "i"),
+        });
+        if (matchedProduct) {
+          await Product.findByIdAndUpdate(matchedProduct._id, {
+            $inc: {
+              scan_count: 1,
+              fake_count: verdict === "COUNTERFEIT" ? 1 : 0,
+            },
+          });
+        }
+      } catch (e) {
+        // Non-blocking — don't fail the scan if product update fails
+      }
 
     // Save to MongoDB
     const scan = await ScanResult.create({

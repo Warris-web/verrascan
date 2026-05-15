@@ -98,6 +98,7 @@ import NafdacPortal        from "./pages/NafdacPortal";
 import VendorPortal        from "./pages/VendorPortal";
 import VendorRegisterPage  from "./pages/VendorRegisterPage";
 import VendorLocatorPage   from "./pages/VendorLocatorPage";
+import LandingPage from "./pages/LandingPage";
 import "./App.css";
 
 function Protected({ role, children }) {
@@ -113,7 +114,8 @@ export default function App() {
     <BrowserRouter>
       <Topbar />
       <Routes>
-        <Route path="/"                element={<ScanPage />} />
+        <Route path="/"     element={<LandingPage />} />
+        <Route path="scan"                element={<ScanPage />} />
         <Route path="/onboard"         element={<OnboardPage />} />
         <Route path="/login"           element={<LoginPage />} />
         <Route path="/vendor/register" element={<VendorRegisterPage />} />

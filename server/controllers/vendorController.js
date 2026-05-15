@@ -227,7 +227,7 @@ exports.registerVendor = async (req, res) => {
         currency:        "NGN",
         initiate_type:   "inline",
         transaction_ref: `VV-${vendor._id}`,
-        callback_url:    `${process.env.CLIENT_URL || "http://localhost:5173"}/vendor/register?status=success`,
+        callback_url: `${process.env.CLIENT_URL || "http://localhost:5173"}/vendor/locator?payment=success&code=${receipt_code}&product=${encodeURIComponent(req.body.product_name || "")}`,
         pass_charge:     false,
         customer_name:   owner_name,
       },

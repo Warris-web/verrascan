@@ -494,6 +494,27 @@ export default function VendorLocatorPage() {
       .finally(() => setLoading(false));
   }, []);
 
+  // Handle Squad redirect back after payment
+useEffect(() => {
+  const payment = searchParams.get("payment");
+  const code    = searchParams.get("code");
+  const pname   = searchParams.get("product") || product;
+
+  if (payment === "success" && code) {
+    setReceipt({
+      code,
+      vendor:       "Your verified pharmacy",
+      address:      "Check your selected pharmacy above",
+      phone:        "—",
+      product:      pname,
+      price:        0,
+      status:       "confirmed",
+      generated_at: new Date().toLocaleString("en-NG"),
+      payment_url:  null,
+    });
+  }
+}, []);
+
   const initiatePayment = async (vendor, prod) => {
     setPaying(true);
     try {

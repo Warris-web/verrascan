@@ -227,7 +227,7 @@ export default function VendorPortal() {
       <div style={{ fontSize: 11, color: "#00C9A7", fontWeight: 600, marginBottom: 4 }}>How it works</div>
       <div style={{ fontSize: 11, color: "#666", lineHeight: 1.7 }}>
         1. Customer scans a fake product near your location<br/>
-        2. VeraScann directs them to your pharmacy<br/>
+        2. Flux directs them to your pharmacy<br/>
         3. They pay via Squad and get a receipt code<br/>
         4. They show you the code — you verify and hand over the product<br/>
         5. Payment arrives in your Squad account automatically

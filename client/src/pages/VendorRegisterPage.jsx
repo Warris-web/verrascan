@@ -101,7 +101,7 @@ export default function VendorRegisterPage() {
       <div style={{ marginBottom: 28 }}>
         <div style={{ fontSize: 11, color: "#00C9A7", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.07em", marginBottom: 6 }}>Vendor Registration</div>
         <div style={{ fontSize: 22, fontWeight: 700, marginBottom: 4 }}>Become a Verified Vendor</div>
-        <div style={{ fontSize: 12, color: "#555" }}>Join the VeraScann verified pharmacy network. When a counterfeit is detected nearby, we send customers to you.</div>
+        <div style={{ fontSize: 12, color: "#555" }}>Join the Flux verified pharmacy network. When a counterfeit is detected nearby, we send customers to you.</div>
       </div>
 
       {/* Stepper */}
@@ -309,7 +309,7 @@ export default function VendorRegisterPage() {
             <div style={{ width: 72, height: 72, borderRadius: "50%", background: "rgba(0,201,167,0.1)", border: "2px solid #00C9A7", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 32, margin: "0 auto 16px" }}>✓</div>
             <div style={{ fontSize: 20, fontWeight: 700, color: "#00C9A7", marginBottom: 8 }}>Payment Successful!</div>
             <div style={{ fontSize: 12, color: "#666", marginBottom: 24 }}>
-              Your pharmacy is now on the VeraScann verified network. Customers will be directed to you when fake products are detected nearby.
+              Your pharmacy is now on the Flux verified network. Customers will be directed to you when fake products are detected nearby.
             </div>
 
             <div style={{ background: "#0D2E24", border: "1px solid #009B82", borderRadius: 10, padding: "16px", textAlign: "left", marginBottom: 20 }}>

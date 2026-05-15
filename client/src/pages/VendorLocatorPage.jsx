@@ -523,7 +523,7 @@ useEffect(() => {
         vendor_id:      isDemoVendor ? null : vendor._id,
         product_name:   prod.name,
         amount:         prod.price,
-        customer_email: "customer@verascann.com",
+        customer_email: "customer@flux.com",
       });
 
       // Show receipt first, payment URL inside it
@@ -557,7 +557,7 @@ useEffect(() => {
         <div>
           <div style={{ fontSize: 11, color: "#E53935", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.07em", marginBottom: 2 }}>Counterfeit Detected</div>
           <div style={{ fontSize: 18, fontWeight: 700 }}>Buy Genuine {product} Near You</div>
-          <div style={{ fontSize: 12, color: "#555" }}>VeraScann-verified pharmacies in {city}</div>
+          <div style={{ fontSize: 12, color: "#555" }}>Flux-verified pharmacies in {city}</div>
         </div>
       </div>
 
@@ -629,7 +629,7 @@ useEffect(() => {
               <div style={{ display: "flex", gap: 10 }}>
                 <button
                   onClick={() => {
-                    const text = `VeraScann Receipt\nCode: ${receipt.code}\nPharmacy: ${receipt.vendor}\nAddress: ${receipt.address}\nPhone: ${receipt.phone}\nProduct: ${receipt.product}\nAmount: ₦${(receipt.price || 0).toLocaleString()}\nDate: ${receipt.generated_at}`;
+                    const text = `Flux Receipt\nCode: ${receipt.code}\nPharmacy: ${receipt.vendor}\nAddress: ${receipt.address}\nPhone: ${receipt.phone}\nProduct: ${receipt.product}\nAmount: ₦${(receipt.price || 0).toLocaleString()}\nDate: ${receipt.generated_at}`;
                     navigator.clipboard?.writeText(text).then(() => alert("Receipt copied!")).catch(() => alert("Copy failed — please screenshot this page"));
                   }}
                   style={{ flex: 1, background: "#1A1A1A", color: "#666", border: "1px solid #2A2A2A", borderRadius: 8, padding: "11px", fontSize: 12, cursor: "pointer", fontFamily: "inherit" }}>
@@ -771,7 +771,7 @@ useEffect(() => {
       <div style={{ marginTop: 24, background: "#141414", border: "1px solid #2A2A2A", borderRadius: 10, padding: "16px 20px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <div>
           <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 3 }}>Own a pharmacy?</div>
-          <div style={{ fontSize: 11, color: "#555" }}>Join the VeraScann network. Get customers directed to you when fakes are detected nearby.</div>
+          <div style={{ fontSize: 11, color: "#555" }}>Join the Flux network. Get customers directed to you when fakes are detected nearby.</div>
         </div>
         <button
           onClick={() => navigate("/vendor/register")}

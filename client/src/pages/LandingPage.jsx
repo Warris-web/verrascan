@@ -22,19 +22,19 @@ export default function LandingPage() {
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", marginBottom: 64 }}>
 
           <div style={{ display: "inline-block", fontSize: 11, fontWeight: 700, color: "#00C9A7", background: "rgba(0,201,167,0.1)", border: "1px solid rgba(0,201,167,0.25)", borderRadius: 20, padding: "5px 14px", marginBottom: 24, letterSpacing: "0.06em", textTransform: "uppercase" }}>
-            Squad Hackathon 3.0 · Challenge 01: Proof of Life
+            Flux
           </div>
 
           <h1 style={{ fontSize: 64, fontWeight: 800, lineHeight: 1.1, letterSpacing: -2, margin: "0 0 20px", maxWidth: 800 }}>
             Stop buying{" "}
             <span style={{ color: "#E53935" }}>fake</span>{" "}
-            drugs.
+            Product.
             <br />
             <span style={{ color: "#00C9A7" }}>See the truth.</span>
           </h1>
 
           <p style={{ fontSize: 18, color: "#888", lineHeight: 1.7, maxWidth: 560, margin: "0 0 40px" }}>
-            VeraScann uses AI to detect counterfeit products in 4 seconds — just point your camera. No QR codes. No hardware. Works on any product.
+            Flux uses AI to detect counterfeit products in 4 seconds — just point your camera. No QR codes. No hardware. Works on any product.
           </p>
 
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "center" }}>
@@ -99,7 +99,8 @@ export default function LandingPage() {
               <div style={{ width: 40, height: 40, borderRadius: "50%", background: "rgba(0,201,167,0.1)", border: "1px solid rgba(0,201,167,0.2)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18, flexShrink: 0 }}>👩</div>
               <div>
                 <div style={{ fontSize: 13, fontWeight: 600 }}>Amina, 28</div>
-                <div style={{ fontSize: 11, color: "#555" }}>Market buyer · Kano, Nigeria</div>
+                <div style={{ fontSize: 11, color: "#555" }}>Market buyer · 
+                    Lagos, Nigeria</div>
               </div>
             </div>
           </div>
@@ -114,7 +115,7 @@ export default function LandingPage() {
 
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 16 }}>
             {[
-              { step: "01", icon: "📷", title: "Point camera",    desc: "Open VeraScann and point your camera at any product packaging. No special hardware needed." },
+              { step: "01", icon: "📷", title: "Point camera",    desc: "Open Flux and point your camera at any product packaging. No special hardware needed." },
               { step: "02", icon: "🔬", title: "AI analyses",    desc: "Six forensic signals analysed simultaneously — typography, colour, OCR, geometry, texture, halftone." },
               { step: "03", icon: "✓",  title: "Get verdict",    desc: "GENUINE, SUSPICIOUS, or COUNTERFEIT — with full forensic breakdown and confidence score in under 5 seconds." },
             ].map((s, i) => (
@@ -200,7 +201,7 @@ export default function LandingPage() {
             <div style={{ maxWidth: 480 }}>
               <div style={{ fontSize: 11, fontWeight: 700, color: "#00C9A7", textTransform: "uppercase", letterSpacing: "0.07em", marginBottom: 12 }}>Powered by Squad API</div>
               <h2 style={{ fontSize: 28, fontWeight: 700, marginBottom: 12, letterSpacing: -0.5 }}>Squad is not a payment button. It's the trust layer.</h2>
-              <p style={{ fontSize: 14, color: "#666", lineHeight: 1.8 }}>Every verified transaction on VeraScann runs through Squad — brand registrations, vendor listings, consumer purchases, and NAFDAC subscriptions.</p>
+              <p style={{ fontSize: 14, color: "#666", lineHeight: 1.8 }}>Every verified transaction on Flux runs through Squad — brand registrations, vendor listings, consumer purchases, and NAFDAC subscriptions.</p>
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 10, minWidth: 280 }}>
               {[

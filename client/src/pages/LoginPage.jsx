@@ -137,7 +137,7 @@ export default function LoginPage() {
       <div style={{ width: "100%", maxWidth: 420 }}>
         <div style={{ textAlign: "center", marginBottom: 28 }}>
           <div style={{ fontSize: 24, fontWeight: 700, marginBottom: 6 }}>
-            Vera<span style={{ color: "#00C9A7" }}>Scann</span> Portal
+            Flux<span style={{ color: "#00C9A7" }}>Squad</span> Portal
           </div>
           <div style={{ fontSize: 12, color: "#555" }}>Secure access for authorized users</div>
         </div>

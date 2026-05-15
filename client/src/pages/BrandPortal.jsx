@@ -203,7 +203,7 @@ export default function BrandPortal() {
   };
 
   const deleteProduct = async (id) => {
-    if (!window.confirm("Remove this product from VeraScann protection?")) return;
+    if (!window.confirm("Remove this product from Flux protection?")) return;
     await axios.delete(`${API}/api/products/${id}`, { headers });
     setProducts(p => p.filter(x => x._id !== id));
   };
@@ -344,7 +344,7 @@ export default function BrandPortal() {
             [
               { title: "Counterfeit detected — Kano North",  body: "A fake pack was scanned in Kano North market. 91% confidence. NAFDAC has been notified.",    color: "#E53935", time: "2 minutes ago"  },
               { title: "Counterfeit detected — Lagos Island", body: "Another fake detected. 3rd detection this week in Lagos Island.",                               color: "#E53935", time: "1 hour ago"    },
-              { title: "Product registered successfully",     body: "Your product has been added to the VeraScann verification pipeline.",                           color: "#43A047", time: "Just now"       },
+              { title: "Product registered successfully",     body: "Your product has been added to the Flux verification pipeline.",                           color: "#43A047", time: "Just now"       },
             ].map((alert, i) => (
               <div key={i} style={{ background: "#141414", border: `1px solid ${alert.color}30`, borderLeft: `3px solid ${alert.color}`, borderRadius: 10, padding: "14px 18px" }}>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>

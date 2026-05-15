@@ -36,8 +36,8 @@ export default function Topbar() {
   return (
     <nav style={{ background: "#141414", borderBottom: "1px solid #2A2A2A", padding: "0 28px", height: 52, display: "flex", alignItems: "center", justifyContent: "space-between", position: "sticky", top: 0, zIndex: 100 }}>
       <div style={{ fontSize: 19, fontWeight: 700, letterSpacing: -0.5 }}>
-        Vera<span style={{ color: "#00C9A7" }}>Scann</span>
-        <span style={{ fontSize: 10, color: "#555", fontWeight: 400, marginLeft: 10 }}>Squad Hackathon 3.0</span>
+        Flux<span style={{ color: "#00C9A7" }}>Squad</span>
+        <span style={{ fontSize: 10, color: "#555", fontWeight: 400, marginLeft: 10 }}></span>
       </div>
 
       <div style={{ display: "flex", gap: 4 }}>

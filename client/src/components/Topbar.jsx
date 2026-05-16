@@ -29,7 +29,7 @@ export default function Topbar() {
   { label: "Vendor Network",path: "/vendor/register", always: true  },
   { label: "NAFDAC",        path: "/dashboard",       role: "nafdac"},
   { label: "My Brands",     path: "/brand",           role: "brand" },
-  { label: "My Pharmacy",   path: "/vendor/portal",   role: "vendor"},
+  { label: "Vendor Portal",   path: "/vendor/portal",   role: "vendor"},
 
 ].filter(l => l.always || (user && user.role === l.role));
 

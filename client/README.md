@@ -367,7 +367,6 @@ Flux/
 | **Vendor** | Product | $100 per listing | Squad Checkout |
 | **B2C** | Consumers | Free forever — data flywheel | Squad Payment Links |
 
-**Year 1 target:** ₦18M ARR — 20 brands × ₦50K × 12 months + NAFDAC subscription
 
 ---
 

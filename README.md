@@ -108,7 +108,7 @@ Squad is not a payment button in Flux — it is the **trust layer** that connect
 - 📁 **Photo upload** — upload any product image for analysis
 - 🔬 **Forensic breakdown** — see exactly what the AI detected
 - 🏥 **Verified vendor locator** — find genuine product near you after fake detected
-- 🧾 **Receipt system** — pay via Squad, get a receipt code to show at pharmacy
+- 🧾 **Receipt system** — pay via Squad, get a receipt code to show at vendor place
 
 ### For Brands
 - 🔐 **Brand portal** — register company, add unlimited products
@@ -119,7 +119,7 @@ Squad is not a payment button in Flux — it is the **trust layer** that connect
 ### For Vendors (Pharmacies)
 - 🏪 **Vendor portal** — manage products, prices, stock levels
 - 💳 **Customer payments** — receive Squad payments directly
-- 📦 **Order tracking** — see customers directed to your pharmacy
+- 📦 **Order tracking** — see customers directed to your vendor
 - 🗺 **Network listing** — appear in locator when fakes detected nearby
 
 ### For NAFDAC
@@ -165,8 +165,8 @@ MONGODB_URI=mongodb+srv://verrascan:verra123@pedaldrop.o2olt1q.mongodb.net/?appN
 JWT_SECRET=verascann_super_secret_jwt_key_2025
 
 # Squad API (get from sandbox.squadco.com)
-SQUAD_SECRET_KEY=sandbox_sk_51108880601ff8d516f85cab4f4c3c97e8c82f943b9b
-SQUAD_PUBLIC_KEY=sandbox_pk_51108880601ff8d516f827a947232a8de5b94e945a91
+SQUAD_SECRET_KEY=
+SQUAD_PUBLIC_KEY=
 SQUAD_BASE_URL=https://sandbox-api-d.squadco.com
 
 # AI microservice
@@ -176,8 +176,8 @@ AI_SERVICE_URL=https://Oriadee-Flux-api.hf.space
 CLIENT_URL=https://fluxsquad.vercel.app/
 
 # Email (optional — for credential notifications)
-MAIL_USER=your_gmail@gmail.com
-MAIL_PASS=your_gmail_app_password
+MAIL_USER=
+MAIL_PASS=
 ```
 
 **`Flux/client/.env`**
@@ -202,16 +202,14 @@ Open [http://localhost:5173](http://localhost:5173)
 
 ---
 
-## Demo Credentials
+## NAFDAC Credentials created by the admin
 
-For judges and evaluators — use these to explore the protected portals:
+
 
 | Role | Email | Password |
 |---|---|---|
 | NAFDAC Officer | ngozi@nafdac.gov.ng | nafdac123 |
-| Brand (Roche) | brand@roche.com | roche123 |
 
-To create a vendor account — go to `/vendor/register` and complete the flow.
 
 ---
 
@@ -297,7 +295,7 @@ Flux/
 │       │   ├── BrandPortal.jsx       # Brand dashboard + product management
 │       │   ├── NafdacPortal.jsx      # NAFDAC intelligence dashboard
 │       │   ├── VendorPortal.jsx      # Vendor dashboard + product/price management
-│       │   ├── VendorRegisterPage.jsx# Pharmacy registration + Squad payment
+│       │   ├── VendorRegisterPage.jsx# Vendor registration + Squad payment
 │       │   └── VendorLocatorPage.jsx # Verified vendor locator + receipt system
 │       ├── components/
 │       │   └── Topbar.jsx
@@ -317,7 +315,7 @@ Flux/
 │   │   ├── User.js                   # brand | vendor | nafdac roles
 │   │   ├── BrandRegistration.js      # Company-level brand account
 │   │   ├── Product.js                # Individual products per brand
-│   │   ├── Vendor.js                 # Pharmacy with products + prices
+│   │   ├── Vendor.js                 # Vendor with products + prices
 │   │   └── ScanResult.js             # Every scan stored with verdict
 │   ├── routes/
 │   │   ├── auth.js
@@ -349,7 +347,7 @@ Flux/
 
 1. Go to [vercel.com](https://vercel.com) → New Project → Import from GitHub
 2. Set root directory to `client`
-3. Add environment variable: `VITE_API_URL=https://your-railway-url.railway.app`
+3. Add environment variable: `VITE_API_URL=https://your-render-url.render.app`
 4. Deploy
 
 ### Database — MongoDB Atlas
@@ -364,9 +362,9 @@ Flux/
 
 | Stream | Customer | Price | Squad API |
 |---|---|---|---|
-| **B2B** | Brands (FMCG, pharma) | ₦50,000/mo — unlimited products | Squad Checkout |
-| **B2G** | NAFDAC, SON | ₦500,000/mo — intelligence dashboard | Squad Recurring |
-| **Vendor** | Pharmacies | ₦10,000 one-time listing | Squad Checkout |
+| **B2B** | Brands (FMCG, pharma,) | $5,000 —  products | Squad Checkout |
+| **B2G** | NAFDAC, SON | $7,000 — intelligence dashboard | Squad Recurring |
+| **Vendor** | Product | $100 per listing | Squad Checkout |
 | **B2C** | Consumers | Free forever — data flywheel | Squad Payment Links |
 
 **Year 1 target:** ₦18M ARR — 20 brands × ₦50K × 12 months + NAFDAC subscription
@@ -378,7 +376,7 @@ Flux/
 | Name | Role |
 |---|---|
 | Warris  | Full Stack Engineer — React, Node.js, MongoDB, Squad API |
-| Boluwatife | AI/ML Engineer — EfficientNet-B0, Tesseract OCR, BERT, FastAPI |
+| Boluwatife | AI/ML Engineer — EfficientNet-B0, Tesseract OCR, BERT, FastAPI,NLP |
 | Similoluwa | Product & UI/UX Designer |
 
 ---

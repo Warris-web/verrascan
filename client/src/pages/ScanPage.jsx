@@ -682,6 +682,7 @@ import { useNavigate } from "react-router-dom";
 const VERA = import.meta.env.VITE_VERASCANN_URL || "https://Oriadee-verascann-api.hf.space";
 
 const PRODUCTS = [
+  { id: "biore uv",  label: "Biore uv",  category: "cosmetics" },
   { id: "coartem",  label: "Coartem",  category: "pharma" },
   { id: "vaseline", label: "Vaseline", category: "cosmetics" },
   { id: "custom",   label: "Other",    category: "general" },

@@ -27,7 +27,7 @@ Flux is an AI-powered product authentication platform that uses computer vision,
 
 | Metric | Scale |
 |---|---|
-| Fake drugs in Nigeria | 70% of drugs in circulation (NAFDAC) |
+| Fake products in Nigeria | 70% of Product in circulation |
 | Deaths per year | 12,300 from fake malaria drugs alone |
 | Counterfeit auto parts | 75% of parts in Nigeria (SON) |
 | NAFDAC seizures | ₦120B worth in just 6 months |
@@ -82,7 +82,7 @@ A user points their camera — or uploads a photo — at any product. In under 5
 | AI Model | EfficientNet-B0, Tesseract OCR, BERT (FastAPI on HuggingFace) |
 | Payments | Squad API (GTBank SquadCo) |
 | Auth | JWT + bcryptjs |
-| Deployment | Vercel (frontend) + Railway (backend) |
+| Deployment | Vercel (frontend) + Render (backend) |
 
 ---
 
